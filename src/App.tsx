@@ -4,7 +4,6 @@ import HeroSection from './components/sections/HeroSection'
 import AboutSection from './components/sections/AboutSection'
 import PopularTours from './components/sections/PopularTours'
 import VideoSection from './components/sections/VideoSection'
-import LocationSection from './components/sections/LocationSection'
 import GallerySection from './components/sections/GallerySection'
 import StoriesSection from './components/sections/StoriesSection'
 import NewsletterSection from './components/sections/NewsletterSection'
@@ -23,7 +22,6 @@ function App() {
         <AboutSection />
         <PopularTours />
         <VideoSection />
-        <LocationSection />
         <GallerySection />
         <StoriesSection />
         <NewsletterSection />
