@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { Menu, X, Search } from 'lucide-react'
 import { Button } from '../ui/button'
+import SearchModal from '../modals/SearchModal'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
@@ -21,7 +23,8 @@ const Header = () => {
     { label: 'TOURS', href: '#tours' },
     { label: 'GALERIA', href: '#gallery' },
     { label: 'STORIES', href: '#stories' },
-    { label: 'CONTATO', href: '#contact' }
+    { label: 'CONTATO', href: '#contact' },
+    { label: 'ONDE ESTAMOS', href: '#onde-estamos' }
   ]
 
   console.log('🧭 Renderizando Header - Menu aberto:', isMenuOpen, '- Scrolled:', isScrolled)
@@ -30,10 +33,10 @@ const Header = () => {
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'
     }`}>
-      <nav className="container mx-auto px-6 py-4">
+      <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="text-2xl font-bold text-gradient">
+          <div className="text-xl sm:text-2xl font-bold text-gradient">
             EXPLORE
           </div>
 
@@ -51,8 +54,13 @@ const Header = () => {
           </div>
 
           {/* Search and Mobile Menu */}
-          <div className="flex items-center space-x-4">
-            <Button variant="ghost" size="icon" className="hover:text-travel-cyan">
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="hover:text-travel-cyan"
+              onClick={() => setIsSearchOpen(true)}
+            >
               <Search className="h-5 w-5" />
             </Button>
             
@@ -67,13 +75,13 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="lg:hidden mt-4 pb-4">
+          <div className="lg:hidden mt-4 pb-4 bg-black/95 backdrop-blur-md rounded-lg p-4">
             <div className="flex flex-col space-y-4">
               {menuItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-sm font-medium hover:text-travel-cyan transition-colors duration-300"
+                  className="text-sm font-medium hover:text-travel-cyan transition-colors duration-300 py-2 px-3 rounded-lg hover:bg-gray-800"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.label}
@@ -83,6 +91,12 @@ const Header = () => {
           </div>
         )}
       </nav>
+      
+      {/* Search Modal */}
+      <SearchModal 
+        isOpen={isSearchOpen} 
+        onClose={() => setIsSearchOpen(false)} 
+      />
     </header>
   )
 }

@@ -39,11 +39,63 @@ const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => {
     console.log('🎯 Capturando lead qualificado:', formData)
 
     try {
-      // Simular envio
-      await new Promise(resolve => setTimeout(resolve, 1500))
+      // Envio via FormSubmit
+      const formElement = document.createElement('form')
+      formElement.action = 'https://formsubmit.co/jxcoder.dev@gmail.com'
+      formElement.method = 'POST'
+      formElement.style.display = 'none'
+
+      // Campos obrigatórios do FormSubmit
+      const subjectInput = document.createElement('input')
+      subjectInput.type = 'hidden'
+      subjectInput.name = '_subject'
+      subjectInput.value = `Lead Qualificado - Tour Discovery - ${formData.name}`
+      formElement.appendChild(subjectInput)
+
+      const captchaInput = document.createElement('input')
+      captchaInput.type = 'hidden'
+      captchaInput.name = '_captcha'
+      captchaInput.value = 'false'
+      formElement.appendChild(captchaInput)
+
+      const nextInput = document.createElement('input')
+      nextInput.type = 'hidden'
+      nextInput.name = '_next'
+      nextInput.value = window.location.href
+      formElement.appendChild(nextInput)
+
+      // Dados do formulário
+      const nameInput = document.createElement('input')
+      nameInput.type = 'hidden'
+      nameInput.name = 'Nome'
+      nameInput.value = formData.name
+      formElement.appendChild(nameInput)
+
+      const emailInput = document.createElement('input')
+      emailInput.type = 'hidden'
+      emailInput.name = 'E-mail'
+      emailInput.value = formData.email
+      formElement.appendChild(emailInput)
+
+      const whatsappInput = document.createElement('input')
+      whatsappInput.type = 'hidden'
+      whatsappInput.name = 'WhatsApp'
+      whatsappInput.value = formData.whatsapp
+      formElement.appendChild(whatsappInput)
+
+      const typeInput = document.createElement('input')
+      typeInput.type = 'hidden'
+      typeInput.name = 'Tipo'
+      typeInput.value = 'Lead Qualificado - Interesse em Tours'
+      formElement.appendChild(typeInput)
+
+      // Submissão
+      document.body.appendChild(formElement)
+      formElement.submit()
+      document.body.removeChild(formElement)
       
       toast.success('🎉 Parabéns! Seu desconto foi garantido! Em breve entraremos em contato.')
-      console.log('✅ Lead qualificado capturado:', formData)
+      console.log('✅ Lead qualificado enviado:', formData)
       
       // Reset form
       setFormData({ name: '', email: '', whatsapp: '' })
@@ -60,7 +112,7 @@ const LeadCaptureModal = ({ isOpen, onClose }: LeadCaptureModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-md bg-black border-gray-800 text-white">
+      <DialogContent className="sm:max-w-md" hideCloseButton>
         <DialogHeader>
           <div className="flex justify-between items-start mb-4">
             <div className="flex items-center gap-2">

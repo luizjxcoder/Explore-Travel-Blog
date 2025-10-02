@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
 import { Image, Play, Heart, MapPin, Camera } from 'lucide-react'
 import { Button } from '../ui/button'
+import useScrollReveal from '../hooks/useScrollReveal'
+import useCounter from '../hooks/useCounter'
+import ImageViewerModal from '../modals/ImageViewerModal'
 
 const GallerySection = () => {
   const [selectedCategory, setSelectedCategory] = useState('all')
+  const [isViewerOpen, setIsViewerOpen] = useState(false)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
   const categories = [
     { id: 'all', label: 'Todas', count: 24 },
@@ -16,17 +21,17 @@ const GallerySection = () => {
   const galleryItems = [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=800&fit=crop',
+      image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop',
       category: 'mountains',
       title: 'Montanhas Canadenses',
       location: 'Canadá',
       likes: 1250,
       type: 'photo',
-      size: 'large'
+      size: 'medium'
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=600&fit=crop',
       category: 'nature',
       title: 'Trilha na Floresta',
       location: 'Costa Rica',
@@ -35,28 +40,38 @@ const GallerySection = () => {
       size: 'medium'
     },
     {
+      id: 11,
+      image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=600&h=600&fit=crop',
+      category: 'cities',
+      title: 'Arquitetura Moderna',
+      location: 'Dubai',
+      likes: 1650,
+      type: 'photo',
+      size: 'medium'
+    },
+    {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400&h=600&fit=crop',
+      image: 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600&h=600&fit=crop',
       category: 'beaches',
       title: 'Paraíso Tropical',
       location: 'Maldivas',
       likes: 2100,
       type: 'video',
-      size: 'tall'
+      size: 'medium'
     },
     {
       id: 4,
-      image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=400&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1551632811-561732d1e306?w=600&h=600&fit=crop',
       category: 'mountains',
       title: 'Pico Gelado',
       location: 'Alpes Suíços',
       likes: 1580,
       type: 'photo',
-      size: 'small'
+      size: 'medium'
     },
     {
       id: 5,
-      image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=400&h=500&fit=crop',
+      image: 'https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=600&h=600&fit=crop',
       category: 'cities',
       title: 'Cidade Histórica',
       location: 'Praga',
@@ -66,27 +81,27 @@ const GallerySection = () => {
     },
     {
       id: 6,
-      image: 'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=600&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1508193638397-1c4234db14d8?w=600&h=600&fit=crop',
       category: 'nature',
       title: 'Cachoeira Épica',
       location: 'Islândia',
       likes: 1750,
       type: 'video',
-      size: 'wide'
+      size: 'medium'
     },
     {
       id: 7,
-      image: 'https://images.unsplash.com/photo-1502780402662-acc01917921e?w=400&h=600&fit=crop',
+      image: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=600&fit=crop',
       category: 'beaches',
       title: 'Praia Paradisíaca',
       location: 'Tailândia',
       likes: 1420,
       type: 'photo',
-      size: 'tall'
+      size: 'medium'
     },
     {
       id: 8,
-      image: 'https://images.unsplash.com/photo-1515408320194-59643816c5b2?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1515408320194-59643816c5b2?w=600&h=600&fit=crop',
       category: 'nature',
       title: 'Safari Africano',
       location: 'Quênia',
@@ -96,37 +111,27 @@ const GallerySection = () => {
     },
     {
       id: 9,
-      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=400&h=300&fit=crop',
+      image: 'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&h=600&fit=crop',
       category: 'mountains',
       title: 'Vale Místico',
       location: 'Nova Zelândia',
       likes: 1100,
       type: 'photo',
-      size: 'small'
+      size: 'medium'
     },
     {
       id: 10,
-      image: 'https://images.unsplash.com/photo-1464822759353-ca9ddd4e2e74?w=600&h=500&fit=crop',
+      image: 'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=600&h=600&fit=crop',
       category: 'mountains',
       title: 'Aurora Boreal',
       location: 'Noruega',
       likes: 3200,
       type: 'video',
-      size: 'wide'
-    },
-    {
-      id: 11,
-      image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=700&fit=crop',
-      category: 'cities',
-      title: 'Arquitetura Moderna',
-      location: 'Dubai',
-      likes: 1650,
-      type: 'photo',
-      size: 'tall'
+      size: 'medium'
     },
     {
       id: 12,
-      image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=400&h=400&fit=crop',
+      image: 'https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?w=600&h=600&fit=crop',
       category: 'beaches',
       title: 'Ilhas Paradisíacas',
       location: 'Seychelles',
@@ -139,6 +144,15 @@ const GallerySection = () => {
   const filteredItems = selectedCategory === 'all' 
     ? galleryItems 
     : galleryItems.filter(item => item.category === selectedCategory)
+
+  const openImageViewer = (index: number) => {
+    setSelectedImageIndex(index)
+    setIsViewerOpen(true)
+  }
+
+  const closeImageViewer = () => {
+    setIsViewerOpen(false)
+  }
 
   const getGridClass = (size: string) => {
     switch (size) {
@@ -157,46 +171,62 @@ const GallerySection = () => {
     }
   }
 
+  const headerRef = useScrollReveal({ delay: 200 })
+  const filtersRef = useScrollReveal({ delay: 300 })
+  const gridRef = useScrollReveal({ delay: 400 })
+  const statsRef = useScrollReveal({ delay: 500 })
+  const ctaRef = useScrollReveal({ delay: 600 })
+
   console.log('🎨 Renderizando Gallery Section - Categoria:', selectedCategory, '- Items:', filteredItems.length)
 
   return (
-    <section id="gallery" className="py-20 bg-gradient-to-b from-gray-900 to-black">
-      <div className="container mx-auto px-6">
+    <section id="gallery" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden">
+      {/* Background with image */}
+      <div className="absolute inset-0">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-40" 
+          style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop)' }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60"></div>
+      </div>
+      <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
+        <div ref={headerRef} className="text-center mb-16 scroll-reveal">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6">
             NOSSA <span className="text-gradient">GALERIA</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
             Explore através das lentes dos nossos aventureiros. Cada imagem conta 
             uma história única de descoberta e magia pelo mundo.
           </p>
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12 animate-fade-in">
-          {categories.map((category) => (
+        <div ref={filtersRef} className="flex flex-wrap justify-center gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 scroll-reveal px-2">
+          {categories.map((category, index) => (
             <button
               key={category.id}
               onClick={() => setSelectedCategory(category.id)}
-              className={`px-6 py-3 rounded-full transition-all duration-300 ${
+              className={`px-3 sm:px-4 md:px-6 py-2 sm:py-3 text-xs sm:text-sm rounded-full transition-all duration-300 animate-fade-in ${
                 selectedCategory === category.id
                   ? 'bg-travel-cyan text-black font-semibold'
                   : 'bg-gray-800 text-gray-300 hover:bg-gray-700'
               }`}
+              style={{animationDelay: `${0.4 + index * 0.1}s`}}
             >
               {category.label} ({category.count})
             </button>
           ))}
         </div>
 
-        {/* Gallery Grid - Optimized Masonry Layout */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px] mb-16">
+        {/* Gallery Grid - Square Layout */}
+        <div ref={gridRef} className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-8 sm:mb-12 lg:mb-16 scroll-reveal">
           {filteredItems.map((item, index) => (
             <div 
               key={item.id}
               className={`relative group cursor-pointer rounded-2xl overflow-hidden card-hover animate-fade-in ${getGridClass(item.size)}`}
-              style={{animationDelay: `${index * 0.1}s`}}
+              style={{animationDelay: `${0.6 + index * 0.08}s`}}
+              onClick={() => openImageViewer(index)}
             >
               <div className="relative w-full h-full">
                 <img 
@@ -216,7 +246,7 @@ const GallerySection = () => {
                 )}
 
                 {/* Overlay Content */}
-                <div className="absolute inset-0 p-3 md:p-6 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute inset-0 p-2 sm:p-3 md:p-6 flex flex-col justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="flex justify-between items-start">
                     <div className="flex items-center gap-2 bg-black/50 rounded-full px-2 md:px-3 py-1">
                       <MapPin className="h-3 w-3 md:h-4 md:w-4 text-travel-cyan" />
@@ -229,7 +259,7 @@ const GallerySection = () => {
                   </div>
 
                   <div>
-                    <h3 className="text-sm md:text-xl font-bold text-white mb-1 md:mb-2">{item.title}</h3>
+                    <h3 className="text-xs sm:text-sm md:text-lg lg:text-xl font-bold text-white mb-1 md:mb-2">{item.title}</h3>
                     <div className="flex items-center justify-between">
                       <span className="text-xs text-gray-300 capitalize">{item.category}</span>
                       {item.type === 'photo' ? 
@@ -245,40 +275,63 @@ const GallerySection = () => {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12 animate-fade-in">
-          <div className="text-center">
-            <div className="text-3xl font-bold text-travel-cyan mb-2">100k+</div>
-            <div className="text-gray-400 text-sm">Fotos Capturadas</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-travel-cyan mb-2">50+</div>
-            <div className="text-gray-400 text-sm">Países Documentados</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-travel-cyan mb-2">500+</div>
-            <div className="text-gray-400 text-sm">Vídeos Exclusivos</div>
-          </div>
-          <div className="text-center">
-            <div className="text-3xl font-bold text-travel-cyan mb-2">1M+</div>
-            <div className="text-gray-400 text-sm">Visualizações</div>
-          </div>
+        <div ref={statsRef} className="flex justify-center gap-3 sm:grid sm:grid-cols-4 sm:gap-6 md:gap-8 mb-8 sm:mb-12 scroll-reveal px-4">
+          {[
+            { value: 100, suffix: 'k+', label: 'Fotos Capturadas' },
+            { value: 50, suffix: '+', label: 'Países Documentados' },
+            { value: 500, suffix: '+', label: 'Vídeos Exclusivos' },
+            { value: 1, suffix: 'M+', label: 'Visualizações' }
+          ].map((stat, index) => {
+            const counter = useCounter({ 
+              end: stat.value, 
+              duration: 2000, 
+              delay: index * 300,
+              suffix: stat.suffix
+            })
+            
+            const displayValue = stat.suffix === 'k+' && counter.count === stat.value 
+              ? `${counter.count}${stat.suffix}`
+              : stat.suffix === 'M+' && counter.count === stat.value
+                ? `${counter.count}${stat.suffix}`
+                : counter.displayValue
+                
+            return (
+              <div 
+                key={index} 
+                ref={counter.elementRef}
+                className="text-center animate-fade-in" 
+                style={{animationDelay: `${1.2 + index * 0.15}s`}}
+              >
+                <div className="text-base sm:text-xl md:text-2xl lg:text-3xl font-bold text-travel-cyan mb-1 sm:mb-2">{displayValue}</div>
+                <div className="text-gray-400 text-xs leading-tight">{stat.label}</div>
+              </div>
+            )
+          })}
         </div>
 
         {/* CTA */}
-        <div className="text-center animate-fade-in">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-travel-cyan/20 rounded-full mb-6">
+        <div ref={ctaRef} className="text-center scroll-reveal">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-travel-cyan/20 rounded-full mb-6 animate-fade-in animate-delay-600">
             <Image className="h-8 w-8 text-travel-cyan" />
           </div>
-          <h3 className="text-3xl font-bold mb-4">Inspire-se e Viaje</h3>
-          <p className="text-gray-300 max-w-xl mx-auto mb-8">
+          <h3 className="text-3xl font-bold mb-4 animate-fade-in animate-delay-700">Inspire-se e Viaje</h3>
+          <p className="text-gray-300 max-w-xl mx-auto mb-8 animate-fade-in animate-delay-800">
             Cada foto é uma porta para uma nova aventura. Qual destino vai despertar 
             seu próximo sonho de viagem?
           </p>
-          <Button className="btn-primary text-lg px-8 py-4">
+          <Button className="btn-primary text-lg px-8 py-4 animate-fade-in animate-delay-800">
             Ver Galeria Completa
           </Button>
         </div>
       </div>
+
+      {/* Image Viewer Modal */}
+      <ImageViewerModal 
+        isOpen={isViewerOpen}
+        onClose={closeImageViewer}
+        images={filteredItems}
+        initialIndex={selectedImageIndex}
+      />
     </section>
   )
 }
