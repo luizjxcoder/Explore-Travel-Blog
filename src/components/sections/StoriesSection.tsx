@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Quote, Star, MapPin, Calendar, ArrowLeft, ArrowRight } from 'lucide-react'
 import { Button } from '../ui/button'
 import BlogDetailModal from '../modals/BlogDetailModal'
@@ -7,6 +7,15 @@ const StoriesSection = () => {
   const [currentStory, setCurrentStory] = useState(0)
   const [selectedBlogPost, setSelectedBlogPost] = useState<typeof blogPosts[0] | null>(null)
   const [isBlogModalOpen, setIsBlogModalOpen] = useState(false)
+
+  // Auto-play functionality for testimonials
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentStory((prevStory) => (prevStory + 1) % stories.length)
+    }, 5000) // Change story every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [])
 
   const stories = [
     {
