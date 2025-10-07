@@ -104,7 +104,7 @@ const ImageViewerModal = ({ isOpen, onClose, images, initialIndex }: ImageViewer
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-[95vw] max-h-[95vh] overflow-hidden p-0 bg-black/95" hideCloseButton>
+      <DialogContent className="max-w-[95vw] max-h-[95vh] overflow-hidden p-0 bg-black/95" hideCloseButton={true}>
         <div className="relative w-full h-full">
       {/* Header Controls */}
       <div className="absolute top-0 left-0 right-0 p-6 bg-gradient-to-b from-black/80 to-transparent z-10">
