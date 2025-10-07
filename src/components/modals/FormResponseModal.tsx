@@ -44,7 +44,7 @@ const FormResponseModal = ({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md" hideCloseButton>
+      <DialogContent className="sm:max-w-md [&>button]:hidden">
         <div className="bg-gray-900 rounded-2xl max-w-md w-full p-8 text-center animate-fade-in">
           <div className={`w-20 h-20 ${data.bgColor} rounded-full flex items-center justify-center mx-auto mb-6`}>
             <Icon className={`h-10 w-10 ${data.iconColor}`} />

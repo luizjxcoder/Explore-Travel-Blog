@@ -63,7 +63,7 @@ const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, videoData }) =
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden p-0 bg-gray-900 border-gray-700" hideCloseButton={true}>
+      <DialogContent className="max-w-6xl max-h-[90vh] overflow-hidden p-0 bg-gray-900 border-gray-700 [&>button]:hidden">
         <div className="relative w-full">
         {/* Header */}
         <div className="flex items-center justify-between p-4 sm:p-6 bg-gray-800/50 backdrop-blur-md">

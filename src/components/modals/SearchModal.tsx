@@ -131,7 +131,7 @@ const SearchModal: React.FC<SearchModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden p-0 bg-black/95 backdrop-blur-xl border border-gray-800" hideCloseButton>
+      <DialogContent className="max-w-2xl max-h-[80vh] overflow-hidden p-0 bg-black/95 backdrop-blur-xl border border-gray-800 [&>button]:hidden">
         {/* Header */}
         <div className="flex items-center gap-4 p-6 border-b border-gray-800">
           <div className="relative flex-1">

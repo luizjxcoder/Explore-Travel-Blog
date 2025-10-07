@@ -124,7 +124,7 @@ const BlogDetailModal = ({ isOpen, onClose, post }: BlogDetailModalProps) => {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0" hideCloseButton>
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-hidden p-0 [&>button]:hidden">
         <div className="overflow-y-auto max-h-[90vh]">
           <div className="min-h-screen py-8 px-4">
             <div className="max-w-4xl mx-auto bg-gray-900 rounded-2xl overflow-hidden">
