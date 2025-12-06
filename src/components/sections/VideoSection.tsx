@@ -70,8 +70,8 @@ const VideoSection = () => {
         style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop)' }}
       ></div>
       
-      {/* Overlay escuro */}
-      <div className="absolute inset-0 bg-black/50"></div>
+      {/* Overlay com cor #282A2C */}
+      <div className="absolute inset-0" style={{backgroundColor: 'rgba(40, 42, 44, 0.85)'}}></div>
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-center">
           {/* Left Content */}
