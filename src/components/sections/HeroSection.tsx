@@ -21,10 +21,23 @@ const HeroSection = () => {
   console.log('🏔️ Renderizando Hero Section')
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center hero-bg py-8 sm:py-0">
-      <div className="absolute inset-0 bg-hero-gradient"></div>
-      
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="home" className="relative min-h-screen flex items-center bg-background py-8 sm:py-0">
+      {/* Container de 95% da viewport com bordas arredondadas */}
+      <div className="relative w-[95%] h-[85vh] lg:h-[95vh] mx-auto">
+        <div className="relative w-full h-full rounded-3xl overflow-hidden shadow-2xl">
+          {/* Imagem de Fundo */}
+          <img 
+            src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&h=1080&fit=crop" 
+            alt="Hero Background"
+            className="w-full h-full object-cover"
+          />
+          
+          {/* Overlay Gradiente */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-black/40"></div>
+          
+          {/* Conteúdo Sobreposto */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="container mx-auto px-6 relative z-10">
         <div ref={heroRef} className="max-w-4xl mx-auto text-center scroll-reveal">
           <h1 className="text-6xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight px-2">
             <span className="block sm:inline">EXPLORE</span>{' '}
@@ -75,6 +88,8 @@ const HeroSection = () => {
                 </div>
               )
             })}
+          </div>
+            </div>
           </div>
         </div>
       </div>
