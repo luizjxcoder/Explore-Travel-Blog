@@ -115,10 +115,10 @@ const StoriesSection = () => {
   console.log('📚 Renderizando Stories Section - História atual:', currentStory)
 
   return (
-    <section id="stories" className="py-12 sm:py-16 lg:py-20 bg-gray-50 relative overflow-hidden">
+    <section id="stories" className="py-12 sm:py-16 lg:py-20 relative overflow-hidden" style={{backgroundColor: '#202324'}}>
       {/* Background Effect */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-white"></div>
+        <div className="absolute inset-0" style={{backgroundColor: '#202324'}}></div>
         
         {/* Animated particles */}
         <div className="absolute inset-0">
@@ -132,10 +132,10 @@ const StoriesSection = () => {
       <div className="container mx-auto px-4 sm:px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 text-gray-900">
-            HISTÓRIAS QUE <span className="text-cyan-600">INSPIRAM</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 text-white">
+            HISTÓRIAS QUE <span className="text-gradient">INSPIRAM</span>
           </h2>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed px-4">
+          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed px-4">
             Conheça as experiências transformadoras dos nossos aventureiros e 
             descubra como cada viagem pode mudar uma vida.
           </p>
@@ -241,8 +241,8 @@ const StoriesSection = () => {
         {/* Blog Posts */}
         <div className="mb-16">
           <div className="text-center mb-12">
-            <h3 className="text-3xl font-bold mb-4 text-cyan-600">Blog & Dicas</h3>
-            <p className="text-gray-600 max-w-2xl mx-auto">
+            <h3 className="text-3xl font-bold mb-4 text-travel-cyan">Blog & Dicas</h3>
+            <p className="text-gray-400 max-w-2xl mx-auto">
               Acompanhe nossos artigos exclusivos com dicas, destinos e inspirações para suas próximas aventuras
             </p>
           </div>
@@ -342,8 +342,8 @@ const StoriesSection = () => {
 
         {/* CTA */}
         <div className="text-center">
-          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 px-4 text-gray-900">Sua História Começa Aqui</h3>
-          <p className="text-sm sm:text-base text-gray-600 max-w-xl mx-auto mb-6 sm:mb-8 px-4">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 px-4 text-white">Sua História Começa Aqui</h3>
+          <p className="text-sm sm:text-base text-gray-400 max-w-xl mx-auto mb-6 sm:mb-8 px-4">
             Faça parte da nossa comunidade de aventureiros e crie memórias que durarão para sempre.
           </p>
           <Button className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 mx-4 font-semibold">
