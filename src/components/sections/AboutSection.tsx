@@ -42,7 +42,7 @@ const AboutSection = () => {
   console.log('👥 Renderizando About Section')
 
   return (
-    <section id="about" className="py-12 sm:py-16 lg:py-20 bg-gradient-to-b from-black to-gray-900">
+    <section id="about" className="py-12 sm:py-16 lg:py-20" style={{backgroundColor: '#282A2C'}}>
       <div className="container mx-auto px-4 sm:px-6">
         {/* Header */}
         <div ref={headerRef} className="text-center mb-16 scroll-reveal">
