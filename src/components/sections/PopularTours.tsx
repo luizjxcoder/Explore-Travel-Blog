@@ -80,7 +80,7 @@ const PopularTours = () => {
   console.log('🗺️ Renderizando Popular Tours - Total de tours:', tours.length)
 
   return (
-    <section id="tours" className="py-12 sm:py-16 lg:py-20 bg-black">
+    <section id="tours" className="py-12 sm:py-16 lg:py-20" style={{backgroundColor: '#202324'}}>
       <div className="container mx-auto px-4 sm:px-6">
         <div ref={headerRef} className="text-center mb-16 scroll-reveal">
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 sm:mb-6 text-gradient">
