@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { Button } from '../ui/button'
 import { ArrowRight, MapPin, Users, Star } from 'lucide-react'
@@ -38,57 +39,58 @@ const HeroSection = () => {
           {/* Conteúdo Sobreposto */}
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="container mx-auto px-6 relative z-10">
-        <div ref={heroRef} className="max-w-4xl mx-auto text-center scroll-reveal">
-          <h1 className="text-6xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight px-2">
-            <span className="block sm:inline">EXPLORE</span>{' '}
-            <span className="block sm:inline text-gradient">TRAVEL</span>
-          </h1>
-          
-          <p className="text-sm sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
-            Tempo de Viajar e descubrir experiências únicas pelo mundo
-          </p>
+              <div ref={heroRef} className="max-w-4xl mx-auto text-center scroll-reveal">
+                <h1 className="text-6xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 sm:mb-6 leading-tight px-2">
+                  <span className="block sm:inline">EXPLORE</span>{' '}
+                  <span className="block sm:inline text-gradient">TRAVEL</span>
+                </h1>
+                
+                <p className="text-sm sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-8 text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
+                  Tempo de Viajar e descobrir experiências únicas pelo mundo
+                </p>
 
-          <div className="flex justify-center mb-8 sm:mb-16 px-4">
-            <Button 
-              className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto max-w-xs"
-              onClick={() => setIsModalOpen(true)}
-            >
-              Descobrir Tours <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
-            </Button>
-          </div>
-
-          {/* Stats */}
-          <div ref={statsRef} className="flex justify-center gap-2 sm:grid sm:grid-cols-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto scroll-reveal px-4 mt-6 sm:mt-0">
-            {stats.map((stat, index) => {
-              const counter = useCounter({ 
-                end: stat.isDecimal ? stat.value * 10 : stat.value, 
-                duration: 2000, 
-                delay: index * 300,
-                suffix: stat.suffix
-              })
-
-              const displayValue = stat.isDecimal 
-                ? `${(counter.count / 10).toFixed(1)}${stat.suffix}`
-                : stat.value >= 1000 
-                  ? `${Math.floor(counter.count / 1000)}k${stat.suffix}`
-                  : counter.displayValue
-
-              return (
-                <div 
-                  key={index} 
-                  ref={counter.elementRef}
-                  className="text-center animate-fade-in animate-delay-200" 
-                  style={{animationDelay: `${0.8 + index * 0.2}s`}}
-                >
-                  <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-travel-cyan/20 rounded-full mb-2 sm:mb-4">
-                    <stat.icon className="h-4 w-4 sm:h-6 sm:w-6 text-travel-cyan" />
-                  </div>
-                  <div className="text-lg sm:text-xl md:text-2xl font-bold text-travel-cyan">{displayValue}</div>
-                  <div className="text-gray-400 text-xs leading-tight">{stat.label}</div>
+                <div className="flex justify-center mb-8 sm:mb-16 px-4">
+                  <Button 
+                    className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto max-w-xs"
+                    onClick={() => setIsModalOpen(true)}
+                  >
+                    Descobrir Tours <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5" />
+                  </Button>
                 </div>
-              )
-            })}
-          </div>
+
+                {/* Stats */}
+                <div ref={statsRef} className="flex justify-center gap-2 sm:grid sm:grid-cols-4 sm:gap-6 md:gap-8 max-w-4xl mx-auto scroll-reveal px-4 mt-6 sm:mt-0">
+                  {stats.map((stat, index) => {
+                    const counter = useCounter({ 
+                      end: stat.isDecimal ? stat.value * 10 : stat.value, 
+                      duration: 2000, 
+                      delay: index * 300,
+                      suffix: stat.suffix
+                    })
+
+                    const displayValue = stat.isDecimal 
+                      ? `${(counter.count / 10).toFixed(1)}${stat.suffix}`
+                      : stat.value >= 1000 
+                        ? `${Math.floor(counter.count / 1000)}k${stat.suffix}`
+                        : counter.displayValue
+
+                    return (
+                      <div 
+                        key={index} 
+                        ref={counter.elementRef}
+                        className="text-center animate-fade-in animate-delay-200" 
+                        style={{animationDelay: `${0.8 + index * 0.2}s`}}
+                      >
+                        <div className="inline-flex items-center justify-center w-8 h-8 sm:w-12 sm:h-12 bg-travel-cyan/20 rounded-full mb-2 sm:mb-4">
+                          <stat.icon className="h-4 w-4 sm:h-6 sm:w-6 text-travel-cyan" />
+                        </div>
+                        <div className="text-lg sm:text-xl md:text-2xl font-bold text-travel-cyan">{displayValue}</div>
+                        <div className="text-gray-400 text-xs leading-tight">{stat.label}</div>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </div>
